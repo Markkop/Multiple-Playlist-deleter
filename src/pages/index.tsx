@@ -83,7 +83,7 @@ export default function Home() {
     setSelectedPlaylists(updatedSelections);
   }
 
-  return (
+  return [
     <div className="bg-gray-100 min-h-screen p-8">
       <div className="container mx-auto max-w-screen-lg">
         <div className="flex gap-2 mb-2 md:gap-4">
@@ -155,6 +155,42 @@ export default function Home() {
           </>
         )}
       </div>
-    </div>
-  );
+
+      <footer className="fixed bottom-0 left-0 right-0 py-4 bg-gradient-to-t from-gray-300 from-0% via-gray-300 via-80% to-transparent to-100%">
+        <p className="font-bold text-center text-gray-500 my-3">
+          Made by Mark Kop
+        </p>
+
+        <div className="container mx-auto max-w-screen-lg flex justify-center items-center gap-8 md:gap-6">
+          {[
+            {
+              href: "https://github.com/MarkKop",
+              src: "/icons/github.svg",
+              alt: "GitHub icon",
+            },
+            {
+              href: "https://twitter.com/heyMarkKop",
+              src: "/icons/twitter.svg",
+              alt: "Twitter icon",
+            },
+            {
+              href: "https://www.linkedin.com/in/marcelo-kopmann",
+              src: "/icons/linkedin.svg",
+              alt: "LinkedIn icon",
+            },
+          ].map(({ href, src, alt }) => (
+            <a href={href} target="_blank" rel="noopener noreferrer" key={href}>
+              <Image
+                src={src}
+                alt={alt}
+                width={24}
+                height={24}
+                className="w-12 h-12 md:w-8 md:h-8"
+              />
+            </a>
+          ))}
+        </div>
+      </footer>
+    </div>,
+  ];
 }

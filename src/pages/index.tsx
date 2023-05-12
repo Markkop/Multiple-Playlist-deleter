@@ -3,6 +3,7 @@ import axios from "axios";
 import SpotifyWebApi from "spotify-web-api-node";
 
 const clientId = process.env.SPOTIFY_CLIENT_ID;
+const redirectUri = process.env.SPOTIFY_REDIRECT_URI;
 
 const spotifyApi = new SpotifyWebApi({
   clientId: clientId,
@@ -17,7 +18,7 @@ export default function Home() {
   const [selectedPlaylists, setSelectedPlaylists] = useState(new Set());
 
   const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=code&redirect_uri=${encodeURIComponent(
-    "http://localhost:3000/"
+    redirectUri
   )}&scope=playlist-read-private%20playlist-modify-public%20playlist-modify-private`;
 
   async function loginUser() {

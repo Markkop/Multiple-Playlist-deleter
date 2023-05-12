@@ -85,20 +85,26 @@ export default function Home() {
 
   return (
     <div className="bg-gray-100 min-h-screen p-8">
-      <div className="container mx-auto">
-        <div className="flex gap-2 mb-2">
-          <Image src="/logo.png" alt="Logo" width={50} height={50} />
-          <h1 className="text-4xl font-bold my-auto">
+      <div className="container mx-auto max-w-screen-lg">
+        <div className="flex gap-2 mb-2 md:gap-4">
+          <Image
+            src="/logo.png"
+            alt="Logo"
+            width={50}
+            height={50}
+            className="my-auto w-10 h-10 md:w-14 md:h-14"
+          />
+          <h1 className="text-2xl font-bold my-auto md:text-5xl">
             Spotify Playlist Deleter
           </h1>
         </div>
 
         {accessToken ? (
           <>
-            <div className="flex">
+            <div className="flex flex-wrap gap-2">
               <button
                 onClick={loadUserPlaylists}
-                className={`text-white px-4 py-2 rounded mr-2 flex gap-4 ${
+                className={`text-white px-4 py-2 rounded flex gap-4 ${
                   isLoading
                     ? "bg-gray-500 cursor-not-allowed"
                     : "bg-green-500 hover:bg-green-600"

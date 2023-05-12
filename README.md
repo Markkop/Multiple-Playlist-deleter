@@ -1,16 +1,22 @@
 # 🎶 Spotify Playlist Deleter
 
-This is a simple Next.js, Tailwind CSS, and TypeScript project that allows users to delete their Spotify playlists. The app uses the Spotify Web API to authenticate users, fetch their playlists, and delete selected playlists.
+![Demo image](https://multiple-spotify-playlist-deleter.vercel.app/ogimage.jpeg)
 
-## Features
+I've been a long-time user of [mixkeepr](https://mixkeepr.com/) for saving my weekly music recommendations. However, I ended up with a lot of unused playlists and was unable to delete them all at once using Spotify.
 
-- Authenticate with Spotify
-- Fetch user's playlists
-- Select and delete multiple playlists
+To solve this problem, I created a tool with the help of AI to delete multiple playlists easily.
 
-# Demo
+## Demo
 
 https://multiple-spotify-playlist-deleter.vercel.app/
+
+## Usage
+
+1. Click the "Authorize Spotify Playlist Deleter" link to authenticate with your Spotify account.
+2. After authorization, you'll be redirected back to the app logged in.
+3. Click the "Load Playlists" button to fetch your playlists.
+4. Select the playlists you want to delete by clicking on them.
+5. Click the "Delete Selected Playlists" button to delete the selected playlists.
 
 ## Prerequisites
 
@@ -60,14 +66,6 @@ npm run dev
 ```
 
 6. Open your browser and navigate to [http://localhost:3000](http://localhost:3000).
-
-## Usage
-
-1. Click the "Authorize Spotify Playlist Deleter" link to authenticate with your Spotify account.
-2. After authorization, you'll be redirected back to the app logged in.
-3. Click the "Load Playlists" button to fetch your playlists.
-4. Select the playlists you want to delete by clicking on them.
-5. Click the "Delete Selected Playlists" button to delete the selected playlists.
 
 ## Contributing
 

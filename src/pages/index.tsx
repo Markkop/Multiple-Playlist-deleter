@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import SpotifyWebApi from "spotify-web-api-node";
 
@@ -10,7 +10,6 @@ const spotifyApi = new SpotifyWebApi({
 });
 
 export default function Home() {
-  const [code, setCode] = useState("");
   const [accessToken, setAccessToken] = useState("");
   const [refreshToken, setRefreshToken] = useState("");
   const [userId, setUserId] = useState("");
@@ -21,7 +20,15 @@ export default function Home() {
     redirectUri
   )}&scope=playlist-read-private%20playlist-modify-public%20playlist-modify-private`;
 
-  async function loginUser() {
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get("code");
+    if (code) {
+      loginUser(code);
+    }
+  }, []);
+
+  async function loginUser(code: string) {
     if (!code) return;
     const response = await axios.post("/api/auth", { code });
     const { access_token, refresh_token } = response.data.accessTokenData;
@@ -105,21 +112,6 @@ export default function Home() {
             >
               Authorize Spotify Playlist Deleter
             </a>
-            <p className="mb-2">
-              After authorization, you'll be redirected back to this page with a
-              code parameter in the URL. Copy and paste that code below:
-            </p>
-            <input
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
-              className="border border-gray-300 p-2 rounded w-full mb-2"
-            />
-            <button
-              onClick={loginUser}
-              className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded w-full"
-            >
-              Log in
-            </button>
           </>
         )}
       </div>

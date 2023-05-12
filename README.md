@@ -64,9 +64,9 @@ npm run dev
 ## Usage
 
 1. Click the "Authorize Spotify Playlist Deleter" link to authenticate with your Spotify account.
-2. After authorization, you'll be redirected back to the app with a code parameter in the URL. Copy and paste that code into the input field and click "Log in".
+2. After authorization, you'll be redirected back to the app logged in.
 3. Click the "Load Playlists" button to fetch your playlists.
-4. Select the playlists you want to delete by checking the checkboxes next to each playlist.
+4. Select the playlists you want to delete by clicking on them.
 5. Click the "Delete Selected Playlists" button to delete the selected playlists.
 
 ## Contributing

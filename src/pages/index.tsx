@@ -92,11 +92,17 @@ export default function Home() {
             <div className="flex">
               <button
                 onClick={loadUserPlaylists}
-                className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded mr-2 flex gap-4"
+                className={`text-white px-4 py-2 rounded mr-2 flex gap-4 ${
+                  isLoading
+                    ? "bg-gray-500 cursor-not-allowed"
+                    : "bg-green-500 hover:bg-green-600"
+                }`}
                 disabled={isLoading}
               >
-                Load Playlists {isLoading && <Spinner />}
+                {isLoading ? "Loading Playlists" : "Load Playlists"}{" "}
+                {isLoading && <Spinner />}
               </button>
+
               <button
                 onClick={deleteSelectedPlaylists}
                 disabled={!selectedPlaylists.size}

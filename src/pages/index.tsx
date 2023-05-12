@@ -93,14 +93,16 @@ export default function Home() {
             <ul className="mt-4 space-y-2">
               {playlists.map((playlist) => (
                 <li key={playlist.id} className="flex items-center">
-                  <input
-                    type="checkbox"
-                    onChange={(e) =>
-                      selectPlaylist(playlist.id, e.target.checked)
-                    }
-                    className="mr-2"
-                  />
-                  <span className="text-xl">{playlist.name}</span>
+                  <label>
+                    <input
+                      type="checkbox"
+                      onChange={(e) =>
+                        selectPlaylist(playlist.id, e.target.checked)
+                      }
+                      className="mr-2"
+                    />
+                    <span className="text-xl">{playlist.name}</span>
+                  </label>
                 </li>
               ))}
             </ul>

@@ -89,79 +89,81 @@ export default function Home() {
   }
 
   return [
-    <div className="bg-gray-100 min-h-screen p-8">
-      <div className="container mx-auto max-w-screen-lg">
-        <div className="flex gap-2 mb-2 md:gap-4">
-          <Image
-            src="/logo.png"
-            alt="Logo"
-            width={50}
-            height={50}
-            className="my-auto w-10 h-10 md:w-14 md:h-14"
-          />
-          <h1 className="text-2xl font-bold my-auto md:text-5xl">
-            Spotify Playlist Deleter
-          </h1>
+    <main className="bg-gray-100 min-h-screen flex flex-col">
+      <div className="p-8 flex-grow">
+        <div className="container mx-auto max-w-screen-lg">
+          <div className="flex gap-2 mb-2 md:gap-4">
+            <Image
+              src="/logo.png"
+              alt="Logo"
+              width={50}
+              height={50}
+              className="my-auto w-10 h-10 md:w-14 md:h-14"
+            />
+            <h1 className="text-2xl font-bold my-auto md:text-5xl">
+              Spotify Playlist Deleter
+            </h1>
+          </div>
+
+          {accessToken ? (
+            <>
+              <div className="pt-3 pb-5 sticky top-0 flex flex-wrap gap-2 bg-gradient-to-b from-gray-100 from-0% via-gray-100 via-80% to-transparent to-100%">
+                <button
+                  onClick={loadUserPlaylists}
+                  className={`text-white px-4 py-2 rounded flex gap-4 ${
+                    isLoading
+                      ? "bg-gray-500 cursor-not-allowed"
+                      : "bg-green-500 hover:bg-green-600"
+                  }`}
+                  disabled={isLoading}
+                >
+                  {isLoading ? "Loading Playlists" : "Load Playlists"}{" "}
+                  {isLoading && <Spinner />}
+                </button>
+
+                <button
+                  onClick={deleteSelectedPlaylists}
+                  disabled={!selectedPlaylists.size}
+                  className={`${
+                    !selectedPlaylists.size ? "opacity-50" : ""
+                  } bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded`}
+                >
+                  Delete Selected Playlists
+                </button>
+              </div>
+
+              <ul className="mt-4 space-y-2">
+                {playlists.map((playlist) => (
+                  <li key={playlist.id} className="flex items-center">
+                    <label>
+                      <input
+                        type="checkbox"
+                        onChange={(e) =>
+                          selectPlaylist(playlist.id, e.target.checked)
+                        }
+                        className="mr-2"
+                      />
+                      <span className="text-xl">{playlist.name}</span>
+                    </label>
+                  </li>
+                ))}
+              </ul>
+            </>
+          ) : (
+            <>
+              <p className="mb-2">Please authorize the app:</p>
+              <a
+                href={authUrl}
+                className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded inline-block mb-4"
+              >
+                Authorize Spotify Playlist Deleter
+              </a>
+            </>
+          )}
         </div>
-
-        {accessToken ? (
-          <>
-            <div className="pt-3 pb-5 sticky top-0 flex flex-wrap gap-2 bg-gradient-to-b from-gray-100 from-0% via-gray-100 via-80% to-transparent to-100%">
-              <button
-                onClick={loadUserPlaylists}
-                className={`text-white px-4 py-2 rounded flex gap-4 ${
-                  isLoading
-                    ? "bg-gray-500 cursor-not-allowed"
-                    : "bg-green-500 hover:bg-green-600"
-                }`}
-                disabled={isLoading}
-              >
-                {isLoading ? "Loading Playlists" : "Load Playlists"}{" "}
-                {isLoading && <Spinner />}
-              </button>
-
-              <button
-                onClick={deleteSelectedPlaylists}
-                disabled={!selectedPlaylists.size}
-                className={`${
-                  !selectedPlaylists.size ? "opacity-50" : ""
-                } bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded`}
-              >
-                Delete Selected Playlists
-              </button>
-            </div>
-
-            <ul className="mt-4 space-y-2">
-              {playlists.map((playlist) => (
-                <li key={playlist.id} className="flex items-center">
-                  <label>
-                    <input
-                      type="checkbox"
-                      onChange={(e) =>
-                        selectPlaylist(playlist.id, e.target.checked)
-                      }
-                      className="mr-2"
-                    />
-                    <span className="text-xl">{playlist.name}</span>
-                  </label>
-                </li>
-              ))}
-            </ul>
-          </>
-        ) : (
-          <>
-            <p className="mb-2">Please authorize the app:</p>
-            <a
-              href={authUrl}
-              className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded inline-block mb-4"
-            >
-              Authorize Spotify Playlist Deleter
-            </a>
-          </>
-        )}
       </div>
-
-      <footer className="fixed bottom-0 left-0 right-0 py-4 bg-gradient-to-t from-gray-300 from-0% via-gray-300 via-80% to-transparent to-100%">
+      ,
+      <footer className="sticky bottom-0 left-0 right-0 py-4 bg-gradient-to-t from-gray-300 from-0% via-gray-300 via-80% to-transparent to-100%">
         <p className="font-bold text-center text-gray-500 my-3">
           Made by Mark Kop
         </p>
@@ -196,6 +198,6 @@ export default function Home() {
           ))}
         </div>
       </footer>
-    </div>,
+    </main>,
   ];
 }

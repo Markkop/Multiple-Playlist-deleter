@@ -70,6 +70,7 @@ export default function Home() {
     for (const playlistId of selectedPlaylists) {
       await spotifyApi.unfollowPlaylist(playlistId);
     }
+    setSelectedPlaylists(new Set());
     await loadUserPlaylists();
   }
 

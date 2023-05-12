@@ -23,6 +23,7 @@ export default function Home() {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get("code");
+
     if (code) {
       loginUser(code);
     }
@@ -34,6 +35,7 @@ export default function Home() {
     const { access_token, refresh_token } = response.data.accessTokenData;
     setAccessToken(access_token);
     setRefreshToken(refresh_token);
+    window.history.pushState({}, "", "/");
   }
 
   async function loadUserPlaylists() {

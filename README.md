@@ -1,48 +1,78 @@
-# Next.js TailwindCSS Typescript Starter
-This is a [Next.js](https://nextjs.org/) 12.x, [TailwindCSS](https://tailwindcss.com/) 3.x, and [TypeScript](https://www.typescriptlang.org/docs/home.html) 4.x starter template
+# 🎶 Spotify Playlist Deleter
 
-For more details, see my blog post. [Nextjs TailwindCSS Typescript Starter](https://dev.to/vuongddang/nextjs-tailwindcss-typescript-starter-1c2m)
+This is a simple Next.js, Tailwind CSS, and TypeScript project that allows users to delete their Spotify playlists. The app uses the Spotify Web API to authenticate users, fetch their playlists, and delete selected playlists.
 
-## How to use this template
-Here're a few ways to create your new project using this template.
-### Using `create-next-app`
-Create a new next.js app from the template using [create-next-app](https://github.com/vercel/next.js/tree/canary/packages/create-next-app)
+## Features
+
+- Authenticate with Spotify
+- Fetch user's playlists
+- Select and delete multiple playlists
+
+# Demo
+
+https://multiple-spotify-playlist-deleter.vercel.app/
+
+## Prerequisites
+
+Before you begin, ensure you have met the following requirements:
+
+- You have a Spotify account
+
+To run this project on your local machine, you also must have the following installed:
+
+- You have registered a new Spotify app in the [Spotify Developer Dashboard](https://developer.spotify.com/dashboard/applications)
+- You have installed Node.js and npm
+
+## Installation
+
+1. Clone this repository:
+
+```bash
+git clone https://github.com/your-username/spotify-playlist-deleter.git
 ```
-npx create-next-app --example "https://github.com/vuongddang/nextjs-tailwindcss-typescript-starter/tree/main"
-# or
-yarn create next-app --example "https://github.com/vuongddang/nextjs-tailwindcss-typescript-starter/tree/main"
+
+2. Change into the project directory:
+
+```bash
+cd spotify-playlist-deleter
 ```
 
-### Create new repository from github [template](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template)
+3. Install the dependencies:
 
-You can generate a new repository with the same directory structure and files by click `Use this template` button in the upper right or [click here](https://github.com/vuongddang/nextjs-tailwindcss-typescript-starter/generate).
-
-## Getting Started
-Install dependencies:
 ```bash
 npm install
-# or
-yarn install
 ```
-Run the development server:
+
+4. Create a `.env.local` file in the root of the project and add your Spotify app credentials:
+
+```bash
+SPOTIFY_CLIENT_ID=your_client_id
+SPOTIFY_CLIENT_SECRET=your_client_secret
+SPOTIFY_REDIRECT_URI=http://localhost:3000/
+```
+
+Replace `your_client_id` and `your_client_secret` with the values from your Spotify app.
+
+5. Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+6. Open your browser and navigate to [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `src/pages/index.js`. The page auto-updates as you edit the file.
+## Usage
 
+1. Click the "Authorize Spotify Playlist Deleter" link to authenticate with your Spotify account.
+2. After authorization, you'll be redirected back to the app with a code parameter in the URL. Copy and paste that code into the input field and click "Log in".
+3. Click the "Load Playlists" button to fetch your playlists.
+4. Select the playlists you want to delete by checking the checkboxes next to each playlist.
+5. Click the "Delete Selected Playlists" button to delete the selected playlists.
 
-## Deploy on Vercel
+## Contributing
 
-Once you have the project running locally you can [import](https://vercel.com/import/git) your project to Vercel and get it up and running in a few clicks.
+If you want to contribute to this project, please open an issue or submit a pull request.
 
-Other option is to click on the button below to create a new repository that look exactly like this one, and sets it up and running on Vercel. 
+## License
 
-[![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/vuongddang/nextjs-tailwindcss-typescript-starter/tree/main)
-
-Check out [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+This project is licensed under the MIT License.

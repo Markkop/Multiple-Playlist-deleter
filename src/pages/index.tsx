@@ -101,7 +101,7 @@ export default function Home() {
 
         {accessToken ? (
           <>
-            <div className="flex flex-wrap gap-2">
+            <div className="pt-3 pb-5 sticky top-0 flex flex-wrap gap-2 bg-gradient-to-b from-gray-100 from-0% via-gray-100 via-80% to-transparent to-100%">
               <button
                 onClick={loadUserPlaylists}
                 className={`text-white px-4 py-2 rounded flex gap-4 ${

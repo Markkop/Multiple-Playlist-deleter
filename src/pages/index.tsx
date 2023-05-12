@@ -69,6 +69,7 @@ export default function Home() {
     for (const playlistId of selectedPlaylists) {
       await spotifyApi.unfollowPlaylist(playlistId);
     }
+    await loadUserPlaylists();
   }
 
   function selectPlaylist(id: string, checked: boolean) {

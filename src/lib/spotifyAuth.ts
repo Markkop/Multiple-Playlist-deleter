@@ -3,11 +3,12 @@ import SpotifyWebApi from "spotify-web-api-node";
 
 const clientId = process.env.SPOTIFY_CLIENT_ID;
 const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
+const redirectUri = process.env.SPOTIFY_REDIRECT_URI;
 
 const spotifyApi = new SpotifyWebApi({
   clientId: clientId,
   clientSecret: clientSecret,
-  redirectUri: "http://localhost:3000/",
+  redirectUri: redirectUri,
 });
 
 export async function getAccessToken(code: string) {

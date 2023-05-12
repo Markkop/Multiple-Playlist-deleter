@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import SpotifyWebApi from "spotify-web-api-node";
 import Spinner from "../components/Spinner";
+import Image from "next/image";
 
 const clientId = process.env.SPOTIFY_CLIENT_ID;
 const redirectUri = process.env.SPOTIFY_REDIRECT_URI;
@@ -85,7 +86,12 @@ export default function Home() {
   return (
     <div className="bg-gray-100 min-h-screen p-8">
       <div className="container mx-auto">
-        <h1 className="text-4xl font-bold mb-6">Spotify Playlist Deleter</h1>
+        <div className="flex gap-2 mb-2">
+          <Image src="/logo.png" alt="Logo" width={50} height={50} />
+          <h1 className="text-4xl font-bold my-auto">
+            Spotify Playlist Deleter
+          </h1>
+        </div>
 
         {accessToken ? (
           <>

@@ -59,44 +59,69 @@ export default function Home() {
   }
 
   return (
-    <div>
-      <h1>Spotify Playlist Deleter</h1>
+    <div className="bg-gray-100 min-h-screen p-8">
+      <div className="container mx-auto">
+        <h1 className="text-4xl font-bold mb-6">Spotify Playlist Deleter</h1>
 
-      {accessToken ? (
-        <>
-          <button onClick={loadUserPlaylists}>Load Playlists</button>
-          <button
-            onClick={deleteSelectedPlaylists}
-            disabled={!selectedPlaylists.size}
-          >
-            Delete Selected Playlists
-          </button>
-          <ul>
-            {playlists.map((playlist) => (
-              <li key={playlist.id}>
-                <input
-                  type="checkbox"
-                  onChange={(e) =>
-                    selectPlaylist(playlist.id, e.target.checked)
-                  }
-                />
-                {playlist.name}
-              </li>
-            ))}
-          </ul>
-        </>
-      ) : (
-        <>
-          <p>Please authorize the app:</p>
-          <a href={authUrl}>Authorize Spotify Playlist Deleter</a>
-          <p>
-            After authorization, you'll be redirected back to this page with a
-            code parameter in the URL. Copy and paste that code below:
-          </p>
-          <input value={code} onChange={(e) => setCode(e.target.value)} />
-          <button onClick={loginUser}>Log in</button>
-        </>
-      )}
+        {accessToken ? (
+          <>
+            <button
+              onClick={loadUserPlaylists}
+              className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded mr-2"
+            >
+              Load Playlists
+            </button>
+            <button
+              onClick={deleteSelectedPlaylists}
+              disabled={!selectedPlaylists.size}
+              className={`${
+                !selectedPlaylists.size ? "opacity-50" : ""
+              } bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded`}
+            >
+              Delete Selected Playlists
+            </button>
+            <ul className="mt-4 space-y-2">
+              {playlists.map((playlist) => (
+                <li key={playlist.id} className="flex items-center">
+                  <input
+                    type="checkbox"
+                    onChange={(e) =>
+                      selectPlaylist(playlist.id, e.target.checked)
+                    }
+                    className="mr-2"
+                  />
+                  <span className="text-xl">{playlist.name}</span>
+                </li>
+              ))}
+            </ul>
+          </>
+        ) : (
+          <>
+            <p className="mb-2">Please authorize the app:</p>
+            <a
+              href={authUrl}
+              className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded inline-block mb-4"
+            >
+              Authorize Spotify Playlist Deleter
+            </a>
+            <p className="mb-2">
+              After authorization, you'll be redirected back to this page with a
+              code parameter in the URL. Copy and paste that code below:
+            </p>
+            <input
+              value={code}
+              onChange={(e) => setCode(e.target.value)}
+              className="border border-gray-300 p-2 rounded w-full mb-2"
+            />
+            <button
+              onClick={loginUser}
+              className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded w-full"
+            >
+              Log in
+            </button>
+          </>
+        )}
+      </div>
     </div>
   );
 }

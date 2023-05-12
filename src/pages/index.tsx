@@ -32,6 +32,10 @@ export default function Home() {
     }
   }, []);
 
+  useEffect(() => {
+    loadUserPlaylists();
+  }, [accessToken]);
+
   async function loginUser(code: string) {
     if (!code) return;
     const response = await axios.post("/api/auth", { code });

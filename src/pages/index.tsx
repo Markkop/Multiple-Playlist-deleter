@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import SpotifyWebApi from "spotify-web-api-node";
+import Spinner from "../components/Spinner";
 
 const clientId = process.env.SPOTIFY_CLIENT_ID;
 const redirectUri = process.env.SPOTIFY_REDIRECT_URI;
@@ -15,6 +16,7 @@ export default function Home() {
   const [userId, setUserId] = useState("");
   const [playlists, setPlaylists] = useState([]);
   const [selectedPlaylists, setSelectedPlaylists] = useState(new Set());
+  const [isLoading, setIsLoading] = useState(false);
 
   const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=code&redirect_uri=${encodeURIComponent(
     redirectUri
@@ -38,18 +40,29 @@ export default function Home() {
     window.history.pushState({}, "", "/");
   }
 
+  async function fetchAllPlaylists(offset = 0, limit = 50) {
+    const { body } = await spotifyApi.getUserPlaylists({ offset, limit });
+    if (body.next) {
+      return [...body.items, ...(await fetchAllPlaylists(offset + limit))];
+    }
+    return body.items;
+  }
+
   async function loadUserPlaylists() {
     if (!accessToken) {
       return;
     }
+    setIsLoading(true);
+
     spotifyApi.setAccessToken(accessToken);
 
     const userData = await spotifyApi.getMe();
     const { id } = userData.body;
     setUserId(id);
 
-    const { body } = await spotifyApi.getUserPlaylists();
-    setPlaylists(body.items);
+    const allPlaylistsItems = await fetchAllPlaylists();
+    setPlaylists(allPlaylistsItems);
+    setIsLoading(false);
   }
 
   async function deleteSelectedPlaylists() {
@@ -75,21 +88,25 @@ export default function Home() {
 
         {accessToken ? (
           <>
-            <button
-              onClick={loadUserPlaylists}
-              className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded mr-2"
-            >
-              Load Playlists
-            </button>
-            <button
-              onClick={deleteSelectedPlaylists}
-              disabled={!selectedPlaylists.size}
-              className={`${
-                !selectedPlaylists.size ? "opacity-50" : ""
-              } bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded`}
-            >
-              Delete Selected Playlists
-            </button>
+            <div className="flex">
+              <button
+                onClick={loadUserPlaylists}
+                className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded mr-2 flex gap-4"
+                disabled={isLoading}
+              >
+                Load Playlists {isLoading && <Spinner />}
+              </button>
+              <button
+                onClick={deleteSelectedPlaylists}
+                disabled={!selectedPlaylists.size}
+                className={`${
+                  !selectedPlaylists.size ? "opacity-50" : ""
+                } bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded`}
+              >
+                Delete Selected Playlists
+              </button>
+            </div>
+
             <ul className="mt-4 space-y-2">
               {playlists.map((playlist) => (
                 <li key={playlist.id} className="flex items-center">

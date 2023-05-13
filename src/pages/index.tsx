@@ -3,6 +3,7 @@ import axios from "axios";
 import SpotifyWebApi from "spotify-web-api-node";
 import Spinner from "../components/Spinner";
 import Image from "next/image";
+import GhRibbonSvg from "../components/GhRibbonSvg";
 
 const clientId = process.env.SPOTIFY_CLIENT_ID;
 const redirectUri = process.env.SPOTIFY_REDIRECT_URI;
@@ -90,6 +91,16 @@ export default function Home() {
 
   return [
     <main className="bg-gray-100 min-h-screen flex flex-col">
+      <div className="animate-ribbon">
+        <a
+          href="https://github.com/Markkop/Multiple-Spotify-Playlist-deleter"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="absolute top-0 right-0"
+        >
+          <GhRibbonSvg />
+        </a>
+      </div>
       <div className="p-8 flex-grow">
         <div className="container mx-auto max-w-screen-lg">
           <div className="flex gap-2 mb-2 md:gap-4">

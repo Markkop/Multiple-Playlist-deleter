@@ -21,6 +21,7 @@ export default function Home() {
   const [selectedPlaylists, setSelectedPlaylists] = useState(new Set());
   const [isLoading, setIsLoading] = useState(false);
   const selectoRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=code&redirect_uri=${encodeURIComponent(
     redirectUri
@@ -96,12 +97,27 @@ export default function Home() {
     setSelectedPlaylists(new Set(selectedIds));
   }
 
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    checkMobile();
+
+    window.addEventListener("resize", checkMobile);
+
+    return () => {
+      window.removeEventListener("resize", checkMobile);
+    };
+  }, []);
+
   return (
     <div>
       <SelectoWrapper
         selectoRef={selectoRef}
         handleSelect={handleSelect}
         selectableTargets={[".playlist-item"]}
+        isMobile={isMobile}
       />
       <main className="bg-gray-100 min-h-screen flex flex-col">
         <div className="animate-ribbon absolute top-0 right-0">
@@ -154,10 +170,12 @@ export default function Home() {
                     Delete Selected Playlists
                   </button>
                 </div>
-                <p className="text-gray-500 text-sm mb-4">
-                  Tip: You can select multiple playlists by clicking and
-                  dragging
-                </p>
+                {!isMobile && (
+                  <p className="text-gray-500 text-sm mb-4">
+                    Tip: You can select multiple playlists by clicking and
+                    dragging
+                  </p>
+                )}
 
                 <ul className="mt-4 space-y-2">
                   {playlists.map((playlist) => (
@@ -170,7 +188,11 @@ export default function Home() {
                         <input
                           type="checkbox"
                           checked={selectedPlaylists.has(playlist.id)}
-                          readOnly
+                          readOnly={!isMobile}
+                          onChange={(e) =>
+                            isMobile &&
+                            selectPlaylist(playlist.id, e.target.checked)
+                          }
                           className="mr-2"
                         />
                         <span className="text-xl">{playlist.name}</span>

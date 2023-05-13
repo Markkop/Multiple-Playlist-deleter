@@ -12,6 +12,7 @@
     "next": "13.1.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-selecto": "^1.22.3",
     "spotify-web-api-node": "^5.0.2"
   },
   "devDependencies": {

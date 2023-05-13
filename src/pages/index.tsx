@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import SpotifyWebApi from "spotify-web-api-node";
 import Spinner from "../components/Spinner";
 import Image from "next/image";
 import GhRibbonSvg from "../components/GhRibbonSvg";
+import SelectoWrapper from "../components/SelectoWrapper";
 
 const clientId = process.env.SPOTIFY_CLIENT_ID;
 const redirectUri = process.env.SPOTIFY_REDIRECT_URI;
@@ -19,6 +20,7 @@ export default function Home() {
   const [playlists, setPlaylists] = useState([]);
   const [selectedPlaylists, setSelectedPlaylists] = useState(new Set());
   const [isLoading, setIsLoading] = useState(false);
+  const selectoRef = useRef(null);
 
   const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=code&redirect_uri=${encodeURIComponent(
     redirectUri
@@ -89,126 +91,149 @@ export default function Home() {
     setSelectedPlaylists(updatedSelections);
   }
 
-  return [
-    <main className="bg-gray-100 min-h-screen flex flex-col">
-      <div className="animate-ribbon">
-        <a
-          href="https://github.com/Markkop/Multiple-Spotify-Playlist-deleter"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="absolute top-0 right-0"
-        >
-          <GhRibbonSvg />
-        </a>
-      </div>
-      <div className="p-8 flex-grow">
-        <div className="container mx-auto max-w-screen-lg">
-          <div className="flex gap-2 mb-2 md:gap-4">
-            <Image
-              src="/logo.png"
-              alt="Logo"
-              width={50}
-              height={50}
-              className="my-auto w-10 h-10 md:w-14 md:h-14"
-            />
-            <h1 className="text-2xl font-bold my-auto md:text-5xl">
-              Spotify Playlist Deleter
-            </h1>
-          </div>
+  function handleSelect(e: any) {
+    const selectedIds = e.selected.map((el) => el.id);
+    setSelectedPlaylists(new Set(selectedIds));
+  }
 
-          {accessToken ? (
-            <>
-              <div className="pt-3 pb-5 sticky top-0 flex flex-wrap gap-2 bg-gradient-to-b from-gray-100 from-0% via-gray-100 via-80% to-transparent to-100%">
-                <button
-                  onClick={loadUserPlaylists}
-                  className={`text-white px-4 py-2 rounded flex gap-4 ${
-                    isLoading
-                      ? "bg-gray-500 cursor-not-allowed"
-                      : "bg-green-500 hover:bg-green-600"
-                  }`}
-                  disabled={isLoading}
-                >
-                  {isLoading ? "Loading Playlists" : "Load Playlists"}{" "}
-                  {isLoading && <Spinner />}
-                </button>
-
-                <button
-                  onClick={deleteSelectedPlaylists}
-                  disabled={!selectedPlaylists.size}
-                  className={`${
-                    !selectedPlaylists.size ? "opacity-50" : ""
-                  } bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded`}
-                >
-                  Delete Selected Playlists
-                </button>
-              </div>
-
-              <ul className="mt-4 space-y-2">
-                {playlists.map((playlist) => (
-                  <li key={playlist.id} className="flex items-center">
-                    <label>
-                      <input
-                        type="checkbox"
-                        onChange={(e) =>
-                          selectPlaylist(playlist.id, e.target.checked)
-                        }
-                        className="mr-2"
-                      />
-                      <span className="text-xl">{playlist.name}</span>
-                    </label>
-                  </li>
-                ))}
-              </ul>
-            </>
-          ) : (
-            <>
-              <p className="mb-2">Please authorize the app:</p>
-              <a
-                href={authUrl}
-                className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded inline-block mb-4"
-              >
-                Authorize Spotify Playlist Deleter
-              </a>
-            </>
-          )}
+  return (
+    <div>
+      <SelectoWrapper
+        selectoRef={selectoRef}
+        handleSelect={handleSelect}
+        selectableTargets={[".playlist-item"]}
+      />
+      <main className="bg-gray-100 min-h-screen flex flex-col">
+        <div className="animate-ribbon absolute top-0 right-0">
+          <a
+            href="https://github.com/Markkop/Multiple-Spotify-Playlist-deleter"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <GhRibbonSvg />
+          </a>
         </div>
-      </div>
-      ,
-      <footer className="sticky bottom-0 left-0 right-0 py-4 bg-gradient-to-t from-gray-300 from-0% via-gray-300 via-80% to-transparent to-100%">
-        <p className="font-bold text-center text-gray-500 my-3">
-          Made by Mark Kop
-        </p>
-
-        <div className="container mx-auto max-w-screen-lg flex justify-center items-center gap-8 md:gap-6">
-          {[
-            {
-              href: "https://github.com/MarkKop",
-              src: "/icons/github.svg",
-              alt: "GitHub icon",
-            },
-            {
-              href: "https://twitter.com/heyMarkKop",
-              src: "/icons/twitter.svg",
-              alt: "Twitter icon",
-            },
-            {
-              href: "https://www.linkedin.com/in/marcelo-kopmann",
-              src: "/icons/linkedin.svg",
-              alt: "LinkedIn icon",
-            },
-          ].map(({ href, src, alt }) => (
-            <a href={href} target="_blank" rel="noopener noreferrer" key={href}>
+        <div className="p-8 flex-grow">
+          <div className="container mx-auto max-w-screen-lg">
+            <div className="flex gap-2 mb-2 md:gap-4">
               <Image
-                src={src}
-                alt={alt}
-                width={24}
-                height={24}
-                className="w-12 h-12 md:w-8 md:h-8"
+                src="/logo.png"
+                alt="Logo"
+                width={50}
+                height={50}
+                className="my-auto w-10 h-10 md:w-14 md:h-14"
               />
-            </a>
-          ))}
+              <h1 className="text-2xl font-bold my-auto md:text-5xl">
+                Spotify Playlist Deleter
+              </h1>
+            </div>
+
+            {accessToken ? (
+              <>
+                <div className="pt-3 pb-5 sticky top-0 flex flex-wrap gap-2 bg-gradient-to-b from-gray-100 from-0% via-gray-100 via-80% to-transparent to-100%">
+                  <button
+                    onClick={loadUserPlaylists}
+                    className={`text-white px-4 py-2 rounded flex gap-4 ${
+                      isLoading
+                        ? "bg-gray-500 cursor-not-allowed"
+                        : "bg-green-500 hover:bg-green-600"
+                    }`}
+                    disabled={isLoading}
+                  >
+                    {isLoading ? "Loading Playlists" : "Load Playlists"}{" "}
+                    {isLoading && <Spinner />}
+                  </button>
+
+                  <button
+                    onClick={deleteSelectedPlaylists}
+                    disabled={!selectedPlaylists.size}
+                    className={`${
+                      !selectedPlaylists.size ? "opacity-50" : ""
+                    } bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded`}
+                  >
+                    Delete Selected Playlists
+                  </button>
+                </div>
+                <p className="text-gray-500 text-sm mb-4">
+                  Tip: You can select multiple playlists by clicking and
+                  dragging
+                </p>
+
+                <ul className="mt-4 space-y-2">
+                  {playlists.map((playlist) => (
+                    <li
+                      key={playlist.id}
+                      className="flex items-center playlist-item"
+                      id={playlist.id}
+                    >
+                      <label>
+                        <input
+                          type="checkbox"
+                          checked={selectedPlaylists.has(playlist.id)}
+                          readOnly
+                          className="mr-2"
+                        />
+                        <span className="text-xl">{playlist.name}</span>
+                      </label>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            ) : (
+              <>
+                <p className="mb-2">Please authorize the app:</p>
+                <a
+                  href={authUrl}
+                  className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded inline-block mb-4"
+                >
+                  Authorize Spotify Playlist Deleter
+                </a>
+              </>
+            )}
+          </div>
         </div>
-      </footer>
-    </main>,
-  ];
+
+        <footer className="sticky bottom-0 left-0 right-0 py-4 bg-gradient-to-t from-gray-300 from-0% via-gray-300 via-80% to-transparent to-100%">
+          <p className="font-bold text-center text-gray-500 my-3">
+            Made by Mark Kop
+          </p>
+
+          <div className="container mx-auto max-w-screen-lg flex justify-center items-center gap-8 md:gap-6">
+            {[
+              {
+                href: "https://github.com/MarkKop",
+                src: "/icons/github.svg",
+                alt: "GitHub icon",
+              },
+              {
+                href: "https://twitter.com/heyMarkKop",
+                src: "/icons/twitter.svg",
+                alt: "Twitter icon",
+              },
+              {
+                href: "https://www.linkedin.com/in/marcelo-kopmann",
+                src: "/icons/linkedin.svg",
+                alt: "LinkedIn icon",
+              },
+            ].map(({ href, src, alt }) => (
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                key={href}
+              >
+                <Image
+                  src={src}
+                  alt={alt}
+                  width={24}
+                  height={24}
+                  className="w-12 h-12 md:w-8 md:h-8"
+                />
+              </a>
+            ))}
+          </div>
+        </footer>
+      </main>
+    </div>
+  );
 }

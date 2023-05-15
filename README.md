@@ -1,6 +1,6 @@
-# 🎶 Spotify Playlist Deleter
+# 🎶 Multiple Playlist Deleter
 
-![Demo image](https://multiple-spotify-playlist-deleter.vercel.app/ogimage.jpeg)
+![Demo image](https://multiple-playlist-deleter.vercel.app/ogimage.jpeg)
 
 I've been a long-time user of [mixkeepr](https://mixkeepr.com/) for saving my weekly music recommendations. However, I ended up with a lot of unused playlists and was unable to delete them all at once using Spotify.
 
@@ -8,11 +8,11 @@ To solve this problem, I created a tool with the help of AI to delete multiple p
 
 ## Demo
 
-https://multiple-spotify-playlist-deleter.vercel.app/
+https://multiple-playlist-deleter.vercel.app/
 
 ## Usage
 
-1. Click the "Authorize Spotify Playlist Deleter" link to authenticate with your Spotify account.
+1. Click the "Authorize Multiple Playlist Deleter" link to authenticate with your Spotify account.
 2. After authorization, you'll be redirected back to the app logged in.
 3. Click the "Load Playlists" button to fetch your playlists.
 4. Select the playlists you want to delete by clicking on them.
@@ -34,13 +34,13 @@ To run this project on your local machine, you also must have the following inst
 1. Clone this repository:
 
 ```bash
-git clone https://github.com/your-username/spotify-playlist-deleter.git
+git clone git@github.com:Markkop/Multiple-Playlist-deleter.git
 ```
 
 2. Change into the project directory:
 
 ```bash
-cd spotify-playlist-deleter
+cd Multiple-Playlist-deleter
 ```
 
 3. Install the dependencies:

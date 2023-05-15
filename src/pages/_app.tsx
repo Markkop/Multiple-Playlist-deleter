@@ -6,7 +6,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>Spotify Playlist Deleter</title>
+        <title>Multiple Playlist Deleter</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta
           name="description"
@@ -21,29 +21,29 @@ function MyApp({ Component, pageProps }: AppProps) {
         />
         <meta
           property="og:image"
-          content="https://multiple-spotify-playlist-deleter.vercel.app/ogimage.jpeg"
+          content="https://multiple-playlist-deleter.vercel.app/ogimage.jpeg"
         />
         <meta
           property="og:url"
-          content="https://multiple-spotify-playlist-deleter.vercel.app/"
+          content="https://multiple-playlist-deleter.vercel.app/"
         />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@heyMarkKop" />
         <meta name="twitter:creator" content="@heyMarkKop" />
-        <meta name="twitter:title" content="Spotify Playlist Deleter" />
+        <meta name="twitter:title" content="Multiple Playlist Deleter" />
         <meta
           name="twitter:description"
           content="Easily delete multiple Spotify playlists at once with this simple web app."
         />
         <meta
           name="twitter:image"
-          content="https://multiple-spotify-playlist-deleter.vercel.app/ogimage.jpeg"
+          content="https://multiple-playlist-deleter.vercel.app/ogimage.jpeg"
         />
-        <meta name="twitter:image:alt" content="Spotify Playlist Deleter" />
+        <meta name="twitter:image:alt" content="Multiple Playlist Deleter" />
         <meta
           name="twitter:url"
-          content="https://multiple-spotify-playlist-deleter.vercel.app/"
+          content="https://multiple-playlist-deleter.vercel.app/"
         />
 
         <link rel="icon" href="/favicon.ico" />

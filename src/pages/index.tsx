@@ -122,7 +122,7 @@ export default function Home() {
       <main className="bg-gray-100 min-h-screen flex flex-col">
         <div className="animate-ribbon absolute top-0 right-0">
           <a
-            href="https://github.com/Markkop/Multiple-Spotify-Playlist-deleter"
+            href="https://github.com/Markkop/Multiple-Playlist-deleter"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -140,7 +140,7 @@ export default function Home() {
                 className="my-auto w-10 h-10 md:w-14 md:h-14"
               />
               <h1 className="text-2xl font-bold my-auto md:text-5xl">
-                Spotify Playlist Deleter
+                Multiple Playlist Deleter
               </h1>
             </div>
 
@@ -208,7 +208,7 @@ export default function Home() {
                   href={authUrl}
                   className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded inline-block mb-4"
                 >
-                  Authorize Spotify Playlist Deleter
+                  Authorize Multiple Playlist Deleter
                 </a>
               </>
             )}

@@ -21,11 +21,11 @@ function MyApp({ Component, pageProps }: AppProps) {
         />
         <meta
           property="og:image"
-          content="https://multiple-playlist-deleter.vercel.app/ogimage.jpeg"
+          content="https://multiple-playlist-deleter-markkop.vercel.app/ogimage.jpeg"
         />
         <meta
           property="og:url"
-          content="https://multiple-playlist-deleter.vercel.app/"
+          content="https://multiple-playlist-deleter-markkop.vercel.app/"
         />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
@@ -38,12 +38,12 @@ function MyApp({ Component, pageProps }: AppProps) {
         />
         <meta
           name="twitter:image"
-          content="https://multiple-playlist-deleter.vercel.app/ogimage.jpeg"
+          content="https://multiple-playlist-deleter-markkop.vercel.app/ogimage.jpeg"
         />
         <meta name="twitter:image:alt" content="Multiple Playlist Deleter" />
         <meta
           name="twitter:url"
-          content="https://multiple-playlist-deleter.vercel.app/"
+          content="https://multiple-playlist-deleter-markkop.vercel.app/"
         />
 
         <link rel="icon" href="/favicon.ico" />

@@ -1,6 +1,6 @@
 # 🎶 Multiple Playlist Deleter
 
-![Demo image](https://multiple-playlist-deleter.vercel.app/ogimage.jpeg)
+![Demo image](https://multiple-playlist-deleter-markkop.vercel.app/ogimage.jpeg)
 
 I've been a long-time user of [mixkeepr](https://mixkeepr.com/) for saving my weekly music recommendations. However, I ended up with a lot of unused playlists and was unable to delete them all at once using Spotify.
 
@@ -8,7 +8,7 @@ To solve this problem, I created a tool with the help of AI to delete multiple p
 
 ## Demo
 
-https://multiple-playlist-deleter.vercel.app/
+https://multiple-playlist-deleter-markkop.vercel.app/
 
 ## Usage
 
